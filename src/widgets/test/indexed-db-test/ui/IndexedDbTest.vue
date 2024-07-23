@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useBroadcastApi } from "@/shared/api/broadcast/broadcast-api";
 import "./style.scss";
 
 import { useIndexDBApi, type IDBGetItem } from '@/shared/api/indexed-db';
@@ -6,6 +7,7 @@ import { IndexedDbStore } from "@/shared/config";
 import { ref, type Ref } from 'vue';
 
 const indexedDB = useIndexDBApi();
+const broadcast = useBroadcastApi();
 const itemsList: Ref<IDBGetItem<number>[]> = ref([]);
 updateList();
 
@@ -18,14 +20,25 @@ async function onAdd() {
 async function onDelete(idx: IDBValidKey) {
     const store = await indexedDB.getTransactionStore(IndexedDbStore.MESSAGES);
     await indexedDB.storeDelete(store, idx);
+    broadcast.sendMessage({
+        type: "message",
+        value: {
+            inChannel: "123"
+        }
+    });
     await updateList();
 }
 
 async function updateList() {
     const store = await indexedDB.getTransactionStore(IndexedDbStore.MESSAGES);
-    console.log(await indexedDB.storeGetAll(store));
     itemsList.value = (await indexedDB.storeGetAll<number>(store));
 }
+
+broadcast.on("message", (message) => {
+    console.log(message);
+    updateList();
+})
+
 </script>
 
 <template>
