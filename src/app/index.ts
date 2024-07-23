@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
-import {router} from './providers'
+import { router } from './providers'
 
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -27,7 +27,9 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
-app.use(createPinia())
-app.use(router)
+app
+    .use(createPinia())
+    .use(router)
+    .use(vuetify);
 
-export {app};
+export { app };

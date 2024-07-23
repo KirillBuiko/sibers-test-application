@@ -1,0 +1,26 @@
+.indexed-db-test {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid lightblue;
+    padding: 10px;
+
+    .indexed-db-test__list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+
+        .indexed-db-test__item {
+            display: flex;
+            height: 50px;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+            border: 2px solid black;
+
+
+        }
+    }
+}
