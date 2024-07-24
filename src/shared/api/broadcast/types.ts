@@ -7,7 +7,10 @@ export type BroadcastMessageValue = {
     },
     "channel-remove": {
         key: IDBValidKey
-    }
+    },
+    "new-user": {
+        user: IDBValidKey
+    },
     "user-block": {
         channel: IDBValidKey,
         user: IDBValidKey

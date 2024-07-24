@@ -1,10 +1,7 @@
-import { defineStore } from "pinia";
+import type { EntityBase } from "@/shared/api/indexed-db"
 
-export const useChat = defineStore("chat-store", () => {
-    function fetchMessages() { }
-    function removeMessage() { }
-    function sendMessage() { }
-    function blockUser() { }
-
-    return { fetchMessages, removeMessage, sendMessage, blockUser }
-});
+export type Message = EntityBase & {
+    user: number,
+    channel: number,
+    value: string
+}

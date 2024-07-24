@@ -2,7 +2,7 @@
 import { useBroadcastApi } from "@/shared/api/broadcast/broadcast-api";
 import "./style.scss";
 
-import { useIndexDBApi, type IDBGetItem } from '@/shared/api/indexed-db';
+import { useIndexDBApi, type IDBGetItem } from '@/shared/api/indexed-db/indexed-db';
 import { IndexedDbStore } from "@/shared/config";
 import { ref, type Ref } from 'vue';
 
@@ -14,24 +14,29 @@ updateList();
 async function onAdd() {
     const store = await indexedDB.getTransactionStore(IndexedDbStore.MESSAGES);
     await indexedDB.storePut(store, 123);
+    sendNotify();
     await updateList();
 }
 
 async function onDelete(idx: IDBValidKey) {
     const store = await indexedDB.getTransactionStore(IndexedDbStore.MESSAGES);
     await indexedDB.storeDelete(store, idx);
-    broadcast.sendMessage({
-        type: "message",
-        value: {
-            inChannel: "123"
-        }
-    });
+    sendNotify();
     await updateList();
 }
 
 async function updateList() {
     const store = await indexedDB.getTransactionStore(IndexedDbStore.MESSAGES);
     itemsList.value = (await indexedDB.storeGetAll<number>(store));
+}
+
+function sendNotify() {
+    broadcast.sendMessage({
+        type: "message",
+        value: {
+            inChannel: "123"
+        }
+    });
 }
 
 broadcast.on("message", (message) => {

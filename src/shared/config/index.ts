@@ -5,5 +5,6 @@ export const BROADCAST_CHANNEL = "chat-notifications";
 export enum IndexedDbStore {
     MESSAGES = "messages",
     CHANNELS = "channels",
-    USERS = "users"
+    USERS = "users",
+    SUBSCRIPTIONS = "subscriptions"
 }

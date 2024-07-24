@@ -1,7 +1,15 @@
 import { defineStore } from "pinia";
-import { INDEXED_DB_NAME, INDEXED_DB_VER, IndexedDbStore } from "../config";
+import { INDEXED_DB_NAME, INDEXED_DB_VER, type IndexedDbStore } from "../../config";
+import _ from "lodash";
+import { dbUpgrade } from "./db-upgrade";
 
-export type IDBGetItem<V> = { value: V, key: IDBValidKey };
+export type EntityBase = { id: number };
+
+export type IDBGetOptions = {
+    key?: IDBValidKey | IDBKeyRange | null,
+    limit?: number,
+    direction?: IDBCursorDirection
+}
 
 /**  
  * Api for indexedDB that's using in entity's api for requests. Based on promises.
@@ -30,16 +38,9 @@ export const useIndexDBApi = defineStore("index-db-api", () => {
                 status = "error";
                 reject(request.error)
             }
-            request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-                const store = event.target && "result" in event.target ? event.target.result as IDBDatabase : undefined;
-                if (!store) {
-                    reject(`Unknown error when upgrade to ${event.newVersion}`);
-                    return;
-                }
-                store.createObjectStore(IndexedDbStore.CHANNELS, { autoIncrement: true });
-                store.createObjectStore(IndexedDbStore.MESSAGES, { autoIncrement: true });
-                store.createObjectStore(IndexedDbStore.USERS, { autoIncrement: true });
-            }
+
+            // Client db initialize on init / version change
+            request.onupgradeneeded = dbUpgrade;
         })
         return _pendingPromise;
     }
@@ -60,22 +61,33 @@ export const useIndexDBApi = defineStore("index-db-api", () => {
         })
     }
 
-    async function storeGet<V>(store: IDBObjectStore, key: string) {
+    async function storeGet<V>(store: IDBObjectStore | IDBIndex, key: IDBValidKey | IDBKeyRange) {
         return handleRequest<V>(store.get(key));
     }
 
-    async function storePut<V>(store: IDBObjectStore, value: V) {
-        return handleRequest<undefined>(store.put(value));
+    async function storePut<V>(store: IDBObjectStore, value: V, key?: IDBValidKey) {
+        return handleRequest<IDBValidKey>(store.put(value, key));
     }
 
-    async function storeGetAll<V>(store: IDBObjectStore): Promise<IDBGetItem<V>[]> {
+    async function storeGetAll<V>(store: IDBObjectStore | IDBIndex, options?: IDBGetOptions): Promise<V[]> {
+        const defaultOptions = _.defaults<IDBGetOptions | undefined, IDBGetOptions>(options, {
+            key: null,
+            limit: -1,
+            direction: "next"
+        })
         return new Promise((resolve) => {
-            const result: IDBGetItem<V>[] = [];
-            store.openCursor().onsuccess = function () {
+            const result: V[] = [];
+            let counter = 0;
+            store.openCursor(defaultOptions.key, defaultOptions.direction).onsuccess = function () {
+                counter++;
                 const cursor = this.result;
                 if (cursor) {
-                    result.push({ value: cursor.value, key: cursor.key });
-                    cursor.continue();
+                    result.push(cursor.value);
+                    if (counter == defaultOptions.limit) {
+                        resolve(result);
+                    } else {
+                        cursor.continue();
+                    }
                 } else {
                     resolve(result);
                 }
