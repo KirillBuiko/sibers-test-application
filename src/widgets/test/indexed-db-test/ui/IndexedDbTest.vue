@@ -2,13 +2,13 @@
 import { useBroadcastApi } from "@/shared/api/broadcast/broadcast-api";
 import "./style.scss";
 
-import { useIndexDBApi, type IDBGetItem } from '@/shared/api/indexed-db/indexed-db';
+import { useIndexDBApi } from '@/shared/api/indexed-db/indexed-db';
 import { IndexedDbStore } from "@/shared/config";
 import { ref, type Ref } from 'vue';
 
 const indexedDB = useIndexDBApi();
 const broadcast = useBroadcastApi();
-const itemsList: Ref<IDBGetItem<number>[]> = ref([]);
+const itemsList: Ref<number[]> = ref([]);
 updateList();
 
 async function onAdd() {
@@ -18,7 +18,7 @@ async function onAdd() {
     await updateList();
 }
 
-async function onDelete(idx: IDBValidKey) {
+async function onDelete(idx: number) {
     const store = await indexedDB.getTransactionStore(IndexedDbStore.MESSAGES);
     await indexedDB.storeDelete(store, idx);
     sendNotify();
@@ -34,7 +34,7 @@ function sendNotify() {
     broadcast.sendMessage({
         type: "message",
         value: {
-            inChannel: "123"
+            inChannel: 123
         }
     });
 }
@@ -57,7 +57,7 @@ broadcast.on("message", (message) => {
                 <span>{{ i }}</span>
                 <v-btn density="compact"
                        icon="mdi-close-box"
-                       @click="onDelete(i.key)"></v-btn>
+                       @click="onDelete(i)"></v-btn>
             </div>
         </div>
     </div>

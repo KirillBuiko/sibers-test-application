@@ -15,13 +15,14 @@ export const useMessageApi = () => {
 
     async function sendMessage(message: Message_I) {
         const store = await db.getTransactionStore(IndexedDbStore.MESSAGES);
-        await db.storePut<Message_I>(store, message)
+        const id = (await db.storePut<Message_I>(store, message)) as number;
         broadcast.sendMessage({
             type: "message",
             value: {
                 inChannel: message.channel
             }
         })
+        return id;
     }
 
     return { fetchMessagesByChannel, sendMessage }

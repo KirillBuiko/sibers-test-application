@@ -3,19 +3,6 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-areas:
-        "F S T"
-        "F S T";
 
-    .test-page__first {
-        grid-area: F;
-    }
-
-    .test-page__second {
-        grid-area: S;
-    }
-
-    .test-page__third {
-        grid-area: T;
-    }
+    overflow-y: auto;
 }

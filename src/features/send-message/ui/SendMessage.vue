@@ -19,7 +19,7 @@ async function onSend() {
         channel: props.channelId,
         user: props.userId,
         value: text.value,
-    }
+    }    
     await api.sendMessage(message);
     emits("send-message", message);
     text.value = "";

@@ -1,7 +1,7 @@
 import { useBroadcastApi } from "@/shared/api/broadcast";
 import { useIndexDBApi, type IDBGetOptions } from "@/shared/api/indexed-db/indexed-db"
 import { IndexedDbStore } from "@/shared/config";
-import type { User } from "../model";
+import type { User_I, User_O } from "../model";
 
 export const useUserApi = () => {
     const db = useIndexDBApi();
@@ -19,18 +19,19 @@ export const useUserApi = () => {
 
     async function fetchUsersByIds(ids: number[]) {
         const store = await db.getTransactionStore(IndexedDbStore.USERS);
-        return await Promise.all(ids.map(id => db.storeGet<User>(store, id)));
+        return await Promise.all(ids.map(id => db.storeGet<User_O>(store, id)));
     }
 
-    async function newUser(user: User) {
+    async function newUser(user: User_I) {
         const store = await db.getTransactionStore(IndexedDbStore.USERS);
-        const key = await db.storePut<User>(store, user)
+        const id = (await db.storePut<User_I>(store, user)) as number
         broadcast.sendMessage({
             type: "new-user",
             value: {
-                user: key
+                user: id
             }
         })
+        return id;
     }
 
     return { fetchUsers, newUser, getUser, fetchUsersByIds }

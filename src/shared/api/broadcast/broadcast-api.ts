@@ -16,6 +16,9 @@ export const useBroadcastApi = defineStore("broadcast-api", () => {
 
     function sendMessage<E extends BroadcastEvent>(message: BroadcastMessage<E>) {
         channel.postMessage(message);
+        eventHandlers.forEach((handler) => {
+            if (message.type === handler.event) handler.fn(message.value);
+        })
     }
 
     function on<E extends BroadcastEvent>(event: E, fn: BroadcastHandlerFunction<E>) {
@@ -23,6 +26,7 @@ export const useBroadcastApi = defineStore("broadcast-api", () => {
             event,
             fn: fn as BroadcastHandlerFunction
         })
+
     }
 
     return { sendMessage, on, channel }

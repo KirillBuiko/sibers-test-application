@@ -7,10 +7,11 @@ export const dbUpgrade: ((this: IDBOpenDBRequest, ev: IDBVersionChangeEvent) => 
     createBasicIndex(channels, ["name"], { unique: true });
 
     const messages = db.createObjectStore(IndexedDbStore.MESSAGES, { autoIncrement: true, keyPath: "id" });
-    messages.createIndex("user-channel", ["user", "channel"], { unique: true })
+    messages.createIndex("user-channel", ["user", "channel"], { unique: false })
     createBasicIndex(messages, ["user", "channel", "value"], { unique: false });
 
     const subscriptions = db.createObjectStore(IndexedDbStore.SUBSCRIPTIONS, { autoIncrement: true, keyPath: "id" });
+    subscriptions.createIndex("user-channel", ["user", "channel"], { unique: false })
     createBasicIndex(subscriptions, ["user", "channel"], { unique: false });
 
     const users = db.createObjectStore(IndexedDbStore.USERS, { autoIncrement: true, keyPath: "id" });

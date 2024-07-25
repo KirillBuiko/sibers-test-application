@@ -1,19 +1,19 @@
 export type BroadcastMessageValue = {
     "message": {
-        inChannel: IDBValidKey
+        inChannel: number
     },
     "channel": {
-        channel: IDBValidKey
+        channel: number
     },
     "channel-remove": {
-        key: IDBValidKey
+        key: number
     },
     "new-user": {
-        user: IDBValidKey
+        user: number
     },
     "user-block": {
-        channel: IDBValidKey,
-        user: IDBValidKey
+        channel: number,
+        user: number
     }
 }
 
