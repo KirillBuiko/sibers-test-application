@@ -10,6 +10,7 @@ const emits = defineEmits<{
 
 function onSend() {
     emits("send-message", text.value);
+    // TODO: also send by api
     text.value = "";
 }
 </script>
