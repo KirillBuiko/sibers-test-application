@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import "./style.scss";
 import { AvatarIcon } from '@/shared/ui';
 
 const props = defineProps<{
@@ -9,17 +10,15 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="message-item">
-        <div class="message-item__avatar">
+    <div class="message">
+        <div class="message__avatar">
             <avatar-icon :image-link="props.avatarLink" />
         </div>
-        <div class="message-item__body">
-            <div class="message-item__name">
-                {{ props.name }}
-            </div>
-            <div class="message-item__value">
-                {{ props.value }}
-            </div>
+        <h2 class="message__name">
+            {{ props.name }}
+        </h2>
+        <div class="message__value">
+            {{ props.value }}
         </div>
     </div>
 </template>

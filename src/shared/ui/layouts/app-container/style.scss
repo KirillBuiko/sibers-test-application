@@ -1,0 +1,19 @@
+@use "../../../../app/styles/variables.scss";
+
+.app-container {
+    display: flex;
+    max-width: variables.$bg-width;
+    height: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid gray;
+    overlay: hidden;
+
+    @media (max-width: variables.$md-width) {
+        max-width: variables.$sm-width;
+    }
+
+    @media (max-width: variables.$bg-width) {
+        max-width: variables.$md-width;
+    }
+}

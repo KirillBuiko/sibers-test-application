@@ -7,6 +7,6 @@ const props = defineProps<{
 </script>
 
 <template>
-    <img src="props.imageLink"
+    <img :src="props.imageLink"
          alt="Avatar icon">
 </template>

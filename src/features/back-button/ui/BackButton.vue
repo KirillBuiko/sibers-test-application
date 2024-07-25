@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import "./style.scss"
+import { RouterLink } from "vue-router";
 </script>
 
 <template>
-    <v-btn icon="mdi-keyboard-backspace"></v-btn>
+    <router-link :to="{ name: 'channels' }">
+        <v-btn icon="mdi-keyboard-backspace" variant="outlined" base-color="black" density="comfortable"></v-btn>
+    </router-link>
 </template>

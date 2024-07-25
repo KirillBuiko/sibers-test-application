@@ -1,0 +1,14 @@
+.page-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    gap: 15px;
+
+    // .page-header__back-button {}
+
+    .page-header__title {
+        font-size: var(--page-title-fz);
+        
+    }
+}

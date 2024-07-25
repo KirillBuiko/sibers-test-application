@@ -7,7 +7,7 @@ import { FETCH_MESSAGES_LIMIT } from "../config";
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
 import _ from "lodash";
 
-type UserByKey = { [ind: number]: User }
+export type UserByKey = { [ind: number]: User }
 
 export const useChatContext = defineStore("chat-context", () => {
     const messages: Ref<Message[]> = ref([]);

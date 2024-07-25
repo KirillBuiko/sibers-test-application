@@ -1,0 +1,25 @@
+.message {
+    display: grid;
+    grid-template-areas:
+        "A N"
+        ". V";
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: 40px 1fr;
+    min-height: 70px;
+
+    .message__avatar {
+        grid-area: A;
+    }
+
+    .message__name {
+        grid-area: N;
+        align-self: flex-start;
+        font-size: 1rem;
+    }
+
+    .message__value {
+        grid-area: V;
+        align-self: flex-start;
+        font-size: 1rem;
+    }
+}
