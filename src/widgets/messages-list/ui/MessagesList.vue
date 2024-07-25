@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { User } from "@/entities/user";
 import "./style.scss"
-import type { Message } from "@/entities/message";
+import type { Message_O } from "@/entities/message";
 import { MessageItem } from "@/entities/message";
 
 const props = defineProps<{
-    messages: Message[],
+    messages: Message_O[],
     users: { [ind: number]: User }
     userId: number
 }>()

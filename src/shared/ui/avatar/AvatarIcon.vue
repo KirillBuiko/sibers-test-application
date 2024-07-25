@@ -8,5 +8,5 @@ const props = defineProps<{
 
 <template>
     <img :src="props.imageLink"
-         alt="Avatar icon">
+         alt="Avatar icon" class="avatar">
 </template>

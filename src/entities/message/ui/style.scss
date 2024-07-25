@@ -9,11 +9,12 @@
 
     .message__avatar {
         grid-area: A;
+        align-self: center;
     }
 
     .message__name {
         grid-area: N;
-        align-self: flex-start;
+        align-self: center;
         font-size: 1rem;
     }
 

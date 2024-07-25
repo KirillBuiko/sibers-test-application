@@ -1,5 +1,5 @@
-import type { Channel } from "@/entities/channel";
-import { useMessageApi, type Message } from "@/entities/message";
+import type { Channel_O } from "@/entities/channel";
+import { useMessageApi, type Message_O } from "@/entities/message";
 import { useUserApi, type User } from "@/entities/user";
 import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
@@ -10,10 +10,10 @@ import _ from "lodash";
 export type UserByKey = { [ind: number]: User }
 
 export const useChatContext = defineStore("chat-context", () => {
-    const messages: Ref<Message[]> = ref([]);
+    const messages: Ref<Message_O[]> = ref([]);
     const allUsers: Ref<UserByKey> = ref({});
     const subscribed: Ref<number[]> = ref([]);
-    const channel: Ref<Channel | undefined> = ref(undefined);
+    const channel: Ref<Channel_O | undefined> = ref(undefined);
 
     const messageApi = useMessageApi();
     const userApi = useUserApi();

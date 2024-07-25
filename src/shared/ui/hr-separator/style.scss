@@ -1,0 +1,11 @@
+.hr-separator {
+    width: 100%;
+    padding: 5px 0;
+
+    .hr-separator__line {
+        width: 100%;
+        height: 2px;
+        background: gray;
+        margin: 0 auto;
+    }
+}

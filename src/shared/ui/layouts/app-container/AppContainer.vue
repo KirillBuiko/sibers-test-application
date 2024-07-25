@@ -4,6 +4,8 @@ import "./style.scss"
 
 <template>
     <div class="app-container">
-        <slot />
+        <div class="app-container__wrapper">
+            <slot />
+        </div>
     </div>
 </template>

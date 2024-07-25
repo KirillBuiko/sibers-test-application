@@ -1,5 +1,10 @@
 .send-message {
-    .send-message__input {}
+    display: grid;
+    grid-template-columns: 1fr 90px;
+    gap: 10px;
+    height: 100%;
 
-    .send-message__button {}
+    .send-message__button {
+        
+    }
 }

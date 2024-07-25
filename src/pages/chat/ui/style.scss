@@ -10,6 +10,18 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        flex: 0 0 auto;
         height: 50px;
+    }
+
+    .chat-page__body {
+        display: grid;
+        grid-template-rows: 1fr 80px;
+        gap: 10px;
+        flex: 1 1;
+        overflow: hidden;
+    }
+
+    .chat-page__send-block {
     }
 }

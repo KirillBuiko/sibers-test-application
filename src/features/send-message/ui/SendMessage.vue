@@ -1,27 +1,41 @@
 <script setup lang="ts">
-import { useMessageApi } from "@/entities/message/api/message-api";
 import "./style.scss";
 import { ref } from "vue";
-const api = useMessageApi();
+import { useSendMessage } from "../api";
+import type { Message_I } from "@/entities/message";
+const api = useSendMessage();
 const text = ref("");
+
 const emits = defineEmits<{
-    (e: "send-message", value: string): void
+    (e: "send-message", value: Message_I): void
+}>()
+const props = defineProps<{
+    userId: number,
+    channelId: number
 }>()
 
-function onSend() {
-    emits("send-message", text.value);
-    // TODO: also send by api
+async function onSend() {
+    const message: Message_I = {
+        channel: props.channelId,
+        user: props.userId,
+        value: text.value,
+    }
+    await api.sendMessage(message);
+    emits("send-message", message);
     text.value = "";
 }
 </script>
 
 <template>
     <div class="send-message">
-        <v-text-field class="send-message__input"
-                      v-model="text"
-                      placeholder="Введите сообщение"
-                      multi-line />
+        <v-textarea class="send-message__input"
+                    v-model="text"
+                    placeholder="Enter message here"
+                    variant="outlined"
+                    rows="2"
+                    no-resize />
         <v-btn class="send-message__button"
-               @click="onSend" />
+               @click="onSend"
+               variant="tonal">Send</v-btn>
     </div>
 </template>

@@ -5,6 +5,8 @@ import { dbUpgrade } from "./db-upgrade";
 
 export type EntityBase = { id: number };
 
+export type OptionalId<T extends EntityBase> = Omit<T, "id"> & Partial<EntityBase>
+
 export type IDBGetOptions = {
     key?: IDBValidKey | IDBKeyRange | null,
     limit?: number,

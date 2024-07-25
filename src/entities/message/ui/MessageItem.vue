@@ -11,9 +11,8 @@ const props = defineProps<{
 
 <template>
     <div class="message">
-        <div class="message__avatar">
-            <avatar-icon :image-link="props.avatarLink" />
-        </div>
+        <avatar-icon class="message__avatar"
+                     :image-link="props.avatarLink" />
         <h2 class="message__name">
             {{ props.name }}
         </h2>

@@ -1,7 +1,7 @@
 import { useBroadcastApi } from "@/shared/api/broadcast";
-import { useIndexDBApi, type IDBGetOptions } from "@/shared/api/indexed-db/indexed-db"
+import { useIndexDBApi,type IDBGetOptions } from "@/shared/api/indexed-db/indexed-db"
 import { IndexedDbStore } from "@/shared/config";
-import type { Message } from "../model";
+import type { Message_I, Message_O } from "../model";
 
 export const useMessageApi = () => {
     const db = useIndexDBApi();
@@ -10,12 +10,12 @@ export const useMessageApi = () => {
     async function fetchMessagesByChannel(options: IDBGetOptions) {
         const store = await db.getTransactionStore(IndexedDbStore.MESSAGES);
         const index = store.index("channel");
-        return db.storeGetAll<Message>(index, options);
+        return db.storeGetAll<Message_O>(index, options);
     }
 
-    async function sendMessage(message: Message) {
+    async function sendMessage(message: Message_I) {
         const store = await db.getTransactionStore(IndexedDbStore.MESSAGES);
-        await db.storePut<Message>(store, message)
+        await db.storePut<Message_I>(store, message)
         broadcast.sendMessage({
             type: "message",
             value: {
