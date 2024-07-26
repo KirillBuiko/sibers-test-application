@@ -4,9 +4,12 @@
     align-items: center;
     height: 100%;
     gap: 15px;
+    overflow: hidden;
 
     .page-header__title {
         font-size: var(--page-title-fz);
-
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }

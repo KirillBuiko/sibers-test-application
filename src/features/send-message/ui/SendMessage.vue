@@ -19,23 +19,31 @@ async function onSend() {
         channel: props.channelId,
         user: props.userId,
         value: text.value,
-    }    
+    }
     await api.sendMessage(message);
     emits("send-message", message);
     text.value = "";
 }
+
+window.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13 && event.ctrlKey) {
+        onSend();
+    }
+});
+
 </script>
 
 <template>
-    <div class="send-message">
+    <v-form class="send-message"
+            @submit.prevent="onSend">
         <v-textarea class="send-message__input"
                     v-model="text"
                     placeholder="Enter message here"
                     variant="outlined"
                     rows="2"
                     no-resize />
-        <v-btn class="send-message__button"
-               @click="onSend"
+        <v-btn type="submit"
+               class="send-message__button"
                variant="tonal">Send</v-btn>
-    </div>
+    </v-form>
 </template>

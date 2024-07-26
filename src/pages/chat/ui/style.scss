@@ -6,10 +6,12 @@
     width: 100%;
 
     .chat-page__header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr 100px;
+        gap: 10px;
+    }
+
+    .chat-page__users-button {
         flex: 0 0 auto;
     }
 
