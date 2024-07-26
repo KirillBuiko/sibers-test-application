@@ -1,20 +1,49 @@
 .channel {
-    height: 70px;
+    display: grid !important;
+    grid-template-areas:
+        "T A"
+        "M A";
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: 20px 1fr;
+    min-width: 200px;
+    gap: 10px;
+    padding: 10px;
 
-    .message__avatar {
+    &__title {
+        gap: 10px;
+        grid-area: T;
+        font-weight: 600;
+        // max-width: 200px;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    &__owner-mark {
+        grid-area: M;
+        width: 90px;
+        font-weight: 300;
+        font-style: italic;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        height: 80px;
         grid-area: A;
-        align-self: center;
     }
+}
 
-    .message__name {
-        grid-area: N;
-        align-self: center;
-        font-size: 1rem;
-    }
-
-    .message__value {
-        grid-area: V;
-        align-self: flex-start;
-        font-size: 1rem;
+@media (max-width: 350px) {
+    .channel {
+        grid-template-areas:
+            "T"
+            "M"
+            "A";
+        grid-template-columns: 1fr;
+        grid-template-rows: 20px 40px 1fr;
     }
 }

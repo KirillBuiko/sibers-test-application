@@ -19,7 +19,7 @@ function goToStart() {
     }
 }
 
-defineExpose({goToStart});
+defineExpose({ goToStart });
 
 </script>
 
@@ -31,6 +31,7 @@ defineExpose({goToStart});
                       :key="m.id"
                       :avatar-link="props.users[m.user]?.avatar"
                       :name="props.users[m.user]?.name"
-                      :value="m.value" />
+                      :value="m.value">
+        </message-item>
     </div>
 </template>

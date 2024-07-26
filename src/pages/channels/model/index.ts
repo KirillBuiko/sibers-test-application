@@ -1,4 +1,4 @@
-import { useChannelApi, type Channel_O } from "@/entities/channel";
+import { useChannelApi, type Channel_I, type Channel_O } from "@/entities/channel";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { FETCH_CHANNELS_LIMIT } from "../config";
@@ -31,5 +31,14 @@ export const useChannelsContext = defineStore("channels-context", () => {
             (await subscribeApi.fetchUserChannels(user.getUserId())).map(sub => sub.channel);
     }
 
-    return { channels, subscribedChannels, init, updateChannels, updateSubscribes }
+    async function createChannel(channel: Channel_I) {
+        const id = await channelApi.createChannel(channel);
+        await subscribeApi.subscribe({
+            user: channel.owner,
+            channel: id
+        })
+        return id;
+    }
+
+    return { channels, subscribedChannels, init, updateChannels, updateSubscribes, createChannel }
 });

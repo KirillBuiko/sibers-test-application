@@ -42,5 +42,9 @@ export const useUser = defineStore("user-store", () => {
         return !!user;
     }
 
-    return { isAuthorized, login, setUserId, getUserId }
+    function logout() {
+        setUserId(-1);
+    }
+
+    return { isAuthorized, login, logout, setUserId, getUserId }
 })

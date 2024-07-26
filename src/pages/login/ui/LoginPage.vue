@@ -15,8 +15,10 @@ async function onSubmit() {
 </script>
 
 <template>
+    <!-- TODO: Move to widgets -->
     <div class="login-page">
-        <v-card class="login-widget">
+        <v-card class="login-widget"
+                elevation="5">
             <v-card-title class="login-widget__title text-h6 text-uppercase">
                 Login
             </v-card-title>
@@ -25,6 +27,7 @@ async function onSubmit() {
                         @submit.prevent="onSubmit">
                     <v-text-field type="email"
                                   v-model="email"
+                                  variant="outlined"
                                   placeholder="Email" />
                     <v-btn type="submit"
                            block> Submit </v-btn>

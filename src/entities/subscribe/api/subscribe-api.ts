@@ -23,6 +23,11 @@ export const useSubscribeApi = () => {
 
     async function subscribe(subscribe: Subscribe_I) {
         const store = await db.getTransactionStore(IndexedDbStore.SUBSCRIPTIONS);
+        const index = store.index("user-channel");
+        const subscription = await db.storeGet<Subscribe_O>(index, [subscribe.user, subscribe.channel]);
+        if (subscription) {
+            return subscription.id;
+        }
         const key = await db.storePut<Subscribe_I>(store, subscribe);
         broadcast.sendMessage({
             type: "channel",

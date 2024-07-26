@@ -9,14 +9,17 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="channel">
+    <div class="channel elevation-3 rounded">
         <div class="channel__title">
             {{ props.channel.name }}
         </div>
-        <div class="channel__owner-mark"
-             v-if="isOwner">
+        <v-chip class="channel__owner-mark"
+                v-if="isOwner">
             <v-icon icon="mdi-star-outline" />
             Owner
+        </v-chip>
+        <div class="channel__actions">
+            <slot name="actions" />
         </div>
     </div>
 </template>
