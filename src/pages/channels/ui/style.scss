@@ -1,0 +1,23 @@
+.channels-page {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+
+    .channels-page__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex: 0 0 auto;
+    }
+
+    .channels-page__body {
+        display: grid;
+        grid-template-rows: 1fr 80px;
+        gap: 10px;
+        flex: 1 1;
+        overflow: hidden;
+    }
+}

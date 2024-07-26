@@ -44,7 +44,7 @@ export const useChatContext = defineStore("chat-context", () => {
     }
 
     async function updateChannel(id: number) {
-        channel.value = await channelApi.getChannel(id);
+        channel.value = await channelApi.fetchChannelById(id);
     }
 
     async function updateMessages() {

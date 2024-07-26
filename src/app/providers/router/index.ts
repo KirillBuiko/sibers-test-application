@@ -4,7 +4,8 @@ import { TestPage } from '@/pages/test-page'
 import { createRouter, createWebHistory } from 'vue-router'
 import { chatLoader } from './chat-loader'
 import { loginGuard } from './login-guard'
-import { LoginPage } from '@/pages/login' 
+import { LoginPage } from '@/pages/login'
+import { channelsLoader } from './channels-loader'
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +15,8 @@ export const router = createRouter({
   }, {
     name: "channels",
     path: "/channels",
-    component: ChannelsPage
+    component: ChannelsPage,
+    beforeEnter: channelsLoader
   }, {
     name: "chat",
     path: "/chat/:id",

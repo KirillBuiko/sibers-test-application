@@ -1,0 +1,20 @@
+.channel {
+    height: 70px;
+
+    .message__avatar {
+        grid-area: A;
+        align-self: center;
+    }
+
+    .message__name {
+        grid-area: N;
+        align-self: center;
+        font-size: 1rem;
+    }
+
+    .message__value {
+        grid-area: V;
+        align-self: flex-start;
+        font-size: 1rem;
+    }
+}

@@ -8,7 +8,6 @@ import type { NavigationGuard } from "vue-router"
  * Return to channels if not subscribed
  */
 export const chatLoader: NavigationGuard = async function (to) {
-    console.log(`LOADER ${to.params.id}`);
     const chatContext = useChatContext();
     const subscribeApi = useSubscribeApi();
     const user = useUser();
@@ -16,11 +15,6 @@ export const chatLoader: NavigationGuard = async function (to) {
     const id = Number(to.params.id as string) || undefined;
     try {
         if (id != undefined) {
-            // TODO: Debug only, remove it
-            // const users = (await subscribeApi.fetchChannelUsers(id));
-            // console.log(users);
-            // user.setUserId(users[0] && users[0].id || -1);
-
             if (await subscribeApi.isSubscribed({ user: user.getUserId()!, channel: id })) {
                 await chatContext.setChannel(id);
                 return true;

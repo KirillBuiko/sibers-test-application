@@ -7,9 +7,14 @@ export const useChannelApi = () => {
     const db = useIndexDBApi();
     const broadcast = useBroadcastApi();
 
-    async function getChannel(id: number) {
+    async function fetchChannelById(id: number) {
         const store = await db.getTransactionStore(IndexedDbStore.CHANNELS);
         return await db.storeGet<Channel_O>(store, id);
+    }
+
+    async function fetchChannels(options: IDBGetOptions) {
+        const store = await db.getTransactionStore(IndexedDbStore.CHANNELS);
+        return db.storeGetAll<Channel_O>(store, options);
     }
 
     async function createChannel(channel: Channel_I) {
@@ -24,5 +29,5 @@ export const useChannelApi = () => {
         return id;
     }
 
-    return { getChannel, createChannel }
+    return { fetchChannelById, fetchChannels, createChannel }
 }
