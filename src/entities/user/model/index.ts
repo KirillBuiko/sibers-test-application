@@ -1,6 +1,7 @@
 import type { EntityBase } from "@/shared/api/indexed-db"
 import { defineStore } from "pinia"
 import { computed, ref } from "vue"
+import { useUserApi } from "../api"
 
 export type User_O = EntityBase & {
     name: string,
@@ -17,10 +18,11 @@ export type User_I = Partial<EntityBase> & {
 }
 
 export const useUser = defineStore("user-store", () => {
-    const userId = ref(Number(localStorage.getItem("user-id")) || undefined);
+    const userId = ref(Number(sessionStorage.getItem("user-id") || -1));
+    const userApi = useUserApi();
 
     const isAuthorized = computed(() => {
-        return userId.value != undefined;
+        return userId.value != -1;
     })
 
     function getUserId() {
@@ -28,13 +30,17 @@ export const useUser = defineStore("user-store", () => {
     }
 
     function setUserId(value: number) {
-        localStorage.setItem("user-id", value.toString());
+        sessionStorage.setItem("user-id", value.toString());
         userId.value = value;
     }
 
     async function login(email: string) {
-        
+        const user = await userApi.getUserByEmail(email);
+        if (user) {
+            setUserId(user.id);
+        }
+        return !!user;
     }
 
-    return {isAuthorized, login, setUserId, getUserId}
+    return { isAuthorized, login, setUserId, getUserId }
 })

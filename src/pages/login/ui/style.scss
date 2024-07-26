@@ -1,0 +1,23 @@
+.login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .login-widget {
+        max-width: 500px;
+        width: 100%;
+        height: 300px;
+
+        &__title {
+            font-weight: bold;
+            text-align: center;
+            padding-block: 20px;
+        }
+
+        &__form {
+            // margin-top: 20px;
+        }
+    }
+}

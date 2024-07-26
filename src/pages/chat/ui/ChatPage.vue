@@ -7,7 +7,7 @@ import { HrSeparator } from "@/shared/ui/hr-separator";
 import { useChatContext } from "../model";
 import { useUser } from "@/entities/user";
 import { useBroadcastApi } from "@/shared/api/broadcast";
-import { nextTick, onMounted, ref, watch, type VNode } from "vue";
+import { onMounted, ref, watch, type VNode } from "vue";
 
 const context = useChatContext();
 const user = useUser();

@@ -12,6 +12,11 @@ export const useUserApi = () => {
         return await db.storeGet(store, id);
     }
 
+    async function getUserByEmail(email: string) {
+        const index = (await db.getTransactionStore(IndexedDbStore.USERS)).index("email");
+        return await db.storeGet<User_O>(index, email);
+    }
+
     async function fetchUsers(options: IDBGetOptions) {
         const store = await db.getTransactionStore(IndexedDbStore.USERS);
         return await db.storeGetAll(store, options);
@@ -34,5 +39,5 @@ export const useUserApi = () => {
         return id;
     }
 
-    return { fetchUsers, newUser, getUser, fetchUsersByIds }
+    return { fetchUsers, newUser, getUser, getUserByEmail, fetchUsersByIds }
 }
