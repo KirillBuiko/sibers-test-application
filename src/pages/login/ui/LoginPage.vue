@@ -1,30 +1,65 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import "./style.scss"
-import { useUser } from "@/entities/user";
+import { useUser, useUserApi, type User_I } from "@/entities/user";
 import { useRouter } from "vue-router";
-const email = ref("");
+import { toRaw } from "vue";
+
 const user = useUser();
+const userApi = useUserApi();
 const router = useRouter();
 
-async function onSubmit() {
+const email = ref("");
+
+const regValue = reactive<User_I>({
+    avatar: "https://placehold.co/100x100",
+    email: "",
+    name: "",
+    username: ""
+})
+
+const regFields: { placeholder: string, key: keyof User_I }[] = [{
+    placeholder: "Email",
+    key: "email"
+}, {
+    placeholder: "Name",
+    key: "name"
+}, {
+    placeholder: "Username",
+    key: "username"
+}];
+
+async function onLogin() {
     if (await user.login(email.value)) {
         router.replace("/");
     }
 }
+
+async function onRegistration() {
+    const id = await userApi.newUser(toRaw(regValue));
+
+    if (id) {
+        user.setUserId(id);
+        router.replace("/");
+    }
+}
+
+const isLogin = ref(true);
+
 </script>
 
 <template>
-    <!-- TODO: Move to widgets -->
+    <!-- TODO: Move login and sign in to widgets -->
     <div class="login-page">
-        <v-card class="login-widget"
+        <v-card v-if="isLogin"
+                class="login-widget"
                 elevation="5">
             <v-card-title class="login-widget__title text-h6 text-uppercase">
                 Login
             </v-card-title>
             <v-card-text>
                 <v-form class="login-widget__form"
-                        @submit.prevent="onSubmit">
+                        @submit.prevent="onLogin">
                     <v-text-field type="email"
                                   v-model="email"
                                   variant="outlined"
@@ -36,7 +71,34 @@ async function onSubmit() {
             <v-card-text>
                 <v-btn variant="plain"
                        block
-                       :ripple="false">Registration is here!</v-btn>
+                       :ripple="false"
+                       @click="isLogin = !isLogin">Registration is here!</v-btn>
+            </v-card-text>
+        </v-card>
+        <v-card v-else
+                class="login-widget"
+                elevation="5">
+            <v-card-title class="login-widget__title text-h6 text-uppercase">
+                Registration
+            </v-card-title>
+            <v-card-text>
+                <v-form class="login-widget__form"
+                        @submit.prevent="onRegistration">
+                    <v-text-field v-for="field in regFields"
+                                  :key="field.key"
+                                  :placeholder="field.placeholder"
+                                  v-model="regValue[field.key]"
+                                  required
+                                  variant="outlined" />
+                    <v-btn type="submit"
+                           block> Submit </v-btn>
+                </v-form>
+            </v-card-text>
+            <v-card-text>
+                <v-btn variant="plain"
+                       block
+                       :ripple="false"
+                       @click="isLogin = !isLogin">Login is here!</v-btn>
             </v-card-text>
         </v-card>
     </div>
