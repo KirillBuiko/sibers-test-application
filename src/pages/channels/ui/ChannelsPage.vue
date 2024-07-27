@@ -28,6 +28,12 @@ async function onChannelCreate() {
         name: channelName.value,
         owner: user.getUserId()
     })
+    closeCreateChannel();
+}
+
+function closeCreateChannel() {
+    createChannelOpen.value = false;
+    channelName.value = "";
 }
 
 broadcast.on("channel", () => {
@@ -88,9 +94,9 @@ broadcast.on("channel", () => {
                 <v-spacer></v-spacer>
                 <v-btn text="Create"
                        variant="outlined"
-                       @click="onChannelCreate" />
+                       @click="onChannelCreate()" />
                 <v-btn text="Cancel"
-                       @click="createChannelOpen = false" />
+                       @click="closeCreateChannel()" />
             </v-card-actions>
         </v-card>
     </v-dialog>
