@@ -8,6 +8,7 @@ import { useChatContext } from "../model";
 import { useUser } from "@/entities/user";
 import { useBroadcastApi } from "@/shared/api/broadcast";
 import { onMounted, ref, watch, type VNode } from "vue";
+import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";
 
 const context = useChatContext();
 const user = useUser();
@@ -35,24 +36,26 @@ function moveChatDown() {
 </script>
 
 <template>
-    <div class="chat-page">
-        <header class="chat-page__header">
-            <page-header>
-                {{ context.channel?.name }}
-            </page-header>
-            <div class="chat-page__users-button">
-                <v-btn prepend-icon="mdi-account-group"
-                       variant="plain">{{ context.subscribed.length }} users</v-btn>
-            </div>
-        </header>
-        <hr-separator />
-        <main class="chat-page__body">
-            <messages-list :messages="context.messages"
-                           :users="context.users"
-                           :user-id="user.getUserId() || -1"
-                           ref="listRef" />
-            <send-message :channel-id="context.channel?.id || -1"
-                          :user-id="user.getUserId() || -1" />
-        </main>
-    </div>
+    <page-container>
+        <div class="chat-page">
+            <header class="chat-page__header">
+                <page-header>
+                    {{ context.channel?.name }}
+                </page-header>
+                <div class="chat-page__users-button">
+                    <v-btn prepend-icon="mdi-account-group"
+                           variant="plain">{{ context.subscribed.length }} users</v-btn>
+                </div>
+            </header>
+            <hr-separator />
+            <main class="chat-page__body">
+                <messages-list :messages="context.messages"
+                               :users="context.users"
+                               :user-id="user.getUserId() || -1"
+                               ref="listRef" />
+                <send-message :channel-id="context.channel?.id || -1"
+                              :user-id="user.getUserId() || -1" />
+            </main>
+        </div>
+    </page-container>
 </template>
