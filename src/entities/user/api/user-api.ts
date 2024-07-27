@@ -29,7 +29,7 @@ export const useUserApi = () => {
 
     async function newUser(user: User_I) {
         const store = await db.getTransactionStore(IndexedDbStore.USERS);
-        const id = (await db.storePut<User_I>(store, user)) as number
+        const id = (await db.storePut<User_I>(store, user)) as number;
         broadcast.sendMessage({
             type: "new-user",
             value: {

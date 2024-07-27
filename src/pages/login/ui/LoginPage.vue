@@ -5,12 +5,15 @@ import { useUser, useUserApi, type User_I } from "@/entities/user";
 import { useRouter } from "vue-router";
 import { toRaw } from "vue";
 import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";
+import { useNotifications } from "@/entities/notifications";
 
 const user = useUser();
 const userApi = useUserApi();
+const notifications = useNotifications();
 const router = useRouter();
 
 const email = ref("");
+const loginValid = ref(false);
 
 const regValue = reactive<User_I>({
     avatar: "https://placehold.co/100x100",
@@ -18,6 +21,7 @@ const regValue = reactive<User_I>({
     name: "",
     username: ""
 })
+const regValid = ref(false);
 
 const regFields: { placeholder: string, key: keyof User_I }[] = [{
     placeholder: "Email",
@@ -33,15 +37,21 @@ const regFields: { placeholder: string, key: keyof User_I }[] = [{
 async function onLogin() {
     if (await user.login(email.value)) {
         router.replace("/");
+    } else {
+        notifications.openNotification("Email is not found");
     }
 }
 
 async function onRegistration() {
-    const id = await userApi.newUser(toRaw(regValue));
+    try {
+        const id = await userApi.newUser(toRaw(regValue));
 
-    if (id) {
-        user.setUserId(id);
-        router.replace("/");
+        if (id) {
+            user.setUserId(id);
+            router.replace("/");
+        }
+    } catch (e) {
+        notifications.openNotification("Email or username is already in use");
     }
 }
 
@@ -50,7 +60,7 @@ const isLogin = ref(true);
 </script>
 
 <template>
-    <!-- TODO: Move login and sign in to widgets -->
+    <!-- TODO: Move login and sign in to widgets... -->
     <page-container :elevated="false">
         <div class="login-page">
             <v-card v-if="isLogin"
@@ -61,10 +71,13 @@ const isLogin = ref(true);
                 </v-card-title>
                 <v-card-text>
                     <v-form class="login-widget__form"
-                            @submit.prevent="onLogin">
+                            v-model="loginValid"
+                            @submit.prevent="loginValid && onLogin()"
+                            validate-on="input">
                         <v-text-field type="email"
                                       v-model="email"
                                       variant="outlined"
+                                      :rules="[(v) => !!v || 'Required']"
                                       placeholder="Email" />
                         <v-btn type="submit"
                                block> Submit </v-btn>
@@ -85,11 +98,14 @@ const isLogin = ref(true);
                 </v-card-title>
                 <v-card-text>
                     <v-form class="login-widget__form"
-                            @submit.prevent="onRegistration">
+                            v-model="regValid"
+                            @submit.prevent="regValid && onRegistration()"
+                            validate-on="input">
                         <v-text-field v-for="field in regFields"
                                       :key="field.key"
                                       :placeholder="field.placeholder"
                                       v-model="regValue[field.key]"
+                                      :rules="[(v) => !!v || 'Required']"
                                       required
                                       variant="outlined" />
                         <v-btn type="submit"
