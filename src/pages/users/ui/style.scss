@@ -1,0 +1,24 @@
+.users-page {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+
+    .users-page__header {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .users-page__users-button {
+        flex: 0 0 auto;
+    }
+
+    .users-page__body {
+        display: grid;
+        grid-template-rows: 80px 1fr;
+        flex: 1 1;
+        overflow: hidden;
+    }
+}

@@ -6,7 +6,7 @@ import UserItem from "@/entities/user/ui/UserItem.vue";
 import { BlockUser } from "@/features/block-user";
 
 const props = defineProps<{
-    channel: Channel_O,
+    channel?: Channel_O,
     users: User_O[]
 }>()
 
@@ -19,7 +19,7 @@ const user = useUser();
         <v-list-item v-for="u in props.users"
                      :key="u.id">
             <user-item :user="u">
-                <template v-if="props.channel.owner == user.getUserId()"
+                <template v-if="props.channel && props.channel.owner == user.getUserId()"
                           #actions>
                     <block-user :channel="props.channel"
                                 :user-id="u.id" />

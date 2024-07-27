@@ -17,9 +17,9 @@ export const useUserApi = () => {
         return await db.storeGet<User_O>(index, email);
     }
 
-    async function fetchUsers(options: IDBGetOptions) {
+    async function fetchUsers(options?: IDBGetOptions) {
         const store = await db.getTransactionStore(IndexedDbStore.USERS);
-        return await db.storeGetAll(store, options);
+        return await db.storeGetAll<User_O>(store, options);
     }
 
     async function fetchUsersByIds(ids: number[]) {

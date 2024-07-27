@@ -64,8 +64,11 @@ broadcast.on("channel", () => {
                     <v-list>
                         <v-list-item prepend-icon="mdi-forum"
                                      slim
-                                     @click="createChannelOpen = !createChannelOpen">Create
-                            channel</v-list-item>
+                                     @click="createChannelOpen = !createChannelOpen">
+                            Create channel</v-list-item>
+                        <v-list-item prepend-icon="mdi-account-multiple"
+                                     slim
+                                     @click="$router.push({ name: 'users' })">Users</v-list-item>
                         <v-divider />
                         <v-list-item prepend-icon="mdi-logout"
                                      slim
