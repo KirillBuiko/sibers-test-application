@@ -3,7 +3,7 @@ import "./style.scss";
 import { BackButton } from "@/features/back-button";
 
 const props = withDefaults(defineProps<{
-    backActive: boolean
+    backActive?: boolean
 }>(), {
     backActive: true
 })

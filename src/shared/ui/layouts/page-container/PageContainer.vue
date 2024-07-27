@@ -2,7 +2,7 @@
 import "./style.scss"
 
 const props = withDefaults(defineProps<{
-    elevated: boolean
+    elevated?: boolean
 }>(), {
     elevated: true
 })

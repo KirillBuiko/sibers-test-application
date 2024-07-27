@@ -12,7 +12,8 @@ export type UserByKey = { [ind: number]: User_O }
 
 export const useChatContext = defineStore("chat-context", () => {
     const messages: Ref<Message_O[]> = ref([]);
-    const users: Ref<UserByKey> = ref({});
+    const messageUsers: Ref<UserByKey> = ref({});
+    const subscribedUsers: Ref<User_O[]> = ref([]);
     const subscribed: Ref<number[]> = ref([]);
     const channel: Ref<Channel_O | undefined> = ref(undefined);
 
@@ -59,16 +60,18 @@ export const useChatContext = defineStore("chat-context", () => {
         if (!channel.value) return;
         const userKeys = _.uniq([...messages.value.map(message => message.user)]);
         console.log(userKeys);
-        users.value = _.keyBy(await userApi.fetchUsersByIds(userKeys), user => user && user.id);
+        messageUsers.value = _.keyBy(await userApi.fetchUsersByIds(userKeys), user => user && user.id);
     }
 
     async function updateSubscribed() {
         if (!channel.value) return;
-        subscribed.value = (await subscribeApi.fetchChannelUsers(channel.value.id)).map(sub => sub.id);
+        subscribed.value = (await subscribeApi.fetchChannelUsers(channel.value.id)).map(sub => sub.user);
+        subscribedUsers.value = await userApi.fetchUsersByIds(subscribed.value);
+        console.log(subscribedUsers.value);
     }
 
     return {
-        messages, users, subscribed, channel,
+        messages, messageUsers, subscribedUsers: subscribedUsers, subscribed, channel,
         setChannel, updateMessages, updateUsers, updateSubscribed
     }
 });

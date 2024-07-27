@@ -9,6 +9,7 @@ import { useUser } from "@/entities/user";
 import { useBroadcastApi } from "@/shared/api/broadcast";
 import { onMounted, ref, watch, type VNode } from "vue";
 import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";
+import { UsersList } from "@/widgets/users-list";
 
 const context = useChatContext();
 const user = useUser();
@@ -43,14 +44,22 @@ function moveChatDown() {
                     {{ context.channel?.name }}
                 </page-header>
                 <div class="chat-page__users-button">
-                    <v-btn prepend-icon="mdi-account-group"
-                           variant="plain">{{ context.subscribed.length }} users</v-btn>
+                    <v-menu :close-on-content-click="false"
+                            location="right bottom"
+                            origin="right top">
+                        <template v-slot:activator="{ props }">
+                            <v-btn prepend-icon="mdi-account-group"
+                                   variant="plain"
+                                   v-bind="props">{{ context.subscribed.length }} users</v-btn>
+                        </template>
+                        <users-list :users="context.subscribedUsers" />
+                    </v-menu>
                 </div>
             </header>
             <hr-separator />
             <main class="chat-page__body">
                 <messages-list :messages="context.messages"
-                               :users="context.users"
+                               :users="context.messageUsers"
                                :user-id="user.getUserId() || -1"
                                ref="listRef" />
                 <send-message :channel-id="context.channel?.id || -1"
