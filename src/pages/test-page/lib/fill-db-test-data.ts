@@ -32,7 +32,7 @@ export async function fillDbWithTestData() {
     console.log("USERS", users);
 
     const channel = await channelApi.createChannel({
-        blackList: [],
+        blacklist: [],
         name: `Channel ${randomNumber()}`,
         owner: users[0]
     });

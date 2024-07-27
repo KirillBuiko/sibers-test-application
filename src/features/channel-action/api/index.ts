@@ -7,7 +7,7 @@ export const useChannelActions = () => {
 
     async function subscribe(channel: Channel_O, sub: Subscribe_I) {
         if (sub.user == undefined || sub.channel == undefined) return;
-        if (channel.blackList.includes(sub.user)) {
+        if (channel.blacklist.includes(sub.user)) {
             // TODO: Notification
             throw "Blacklisted";
         } else {

@@ -25,7 +25,7 @@ function onLogout() {
 
 async function onChannelCreate() {
     await context.createChannel({
-        blackList: [],
+        blacklist: [],
         name: channelName.value,
         owner: user.getUserId()
     })

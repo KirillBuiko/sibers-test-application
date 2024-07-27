@@ -7,6 +7,7 @@ import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
 import type { Subscribe_O } from "@/entities/subscribe";
 import { useMessageApi, type Message_O } from "@/entities/message";
 import { useUserApi, type User_O } from "@/entities/user";
+import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";
 
 const newIds = ref<Awaited<ReturnType<typeof fillDbWithTestData>> | undefined>()
 const users = ref<User_O[]>([])
@@ -33,33 +34,34 @@ function onFill() {
 </script>
 
 <template>
-    <div class="test-page">
-        <div class="test-page__buttons">
-            <v-btn @click="onDbRemove">REMOVE DB</v-btn>
-            <v-btn @click="onFill">FILL DB</v-btn>
-        </div>
-        <div>
-            <h3>Users</h3>
-            <div v-for="i in users"
-                 :key="i.id">{{ i }}</div>
-        </div>
-        <div>
-            <h3>Ch. users</h3>
-            <div v-for="i in channelUsers"
-                 :key="i.id">{{ i }}</div>
-        </div>
+    <page-container>
+        <div class="test-page">
+            <div class="test-page__buttons">
+                <v-btn @click="onDbRemove">REMOVE DB</v-btn>
+                <v-btn @click="onFill">FILL DB</v-btn>
+            </div>
+            <div>
+                <h3>Users</h3>
+                <div v-for="i in users"
+                     :key="i.id">{{ i }}</div>
+            </div>
+            <div>
+                <h3>Ch. users</h3>
+                <div v-for="i in channelUsers"
+                     :key="i.id">{{ i }}</div>
+            </div>
 
-        <div>
-            <h3>User channels</h3>
-            <div v-for="i in userChannels"
-                 :key="i.id">{{ i }}</div>
-        </div>
+            <div>
+                <h3>User channels</h3>
+                <div v-for="i in userChannels"
+                     :key="i.id">{{ i }}</div>
+            </div>
 
-        <div>
-            <h3>Messages</h3>
-            <div v-for="i in messages"
-                 :key="i.id">{{ i }}</div>
+            <div>
+                <h3>Messages</h3>
+                <div v-for="i in messages"
+                     :key="i.id">{{ i }}</div>
+            </div>
         </div>
-
-    </div>
+    </page-container>
 </template>
