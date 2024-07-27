@@ -9,11 +9,10 @@ const props = defineProps<{
 <template>
     <v-card :prepend-avatar="props.user.avatar"
             :title="user.name"
-            :subtitle="props.user.username"
+            :subtitle="props.user.email"
             density="compact">
         <template #append>
-            <v-btn density="comfortable"
-                   icon="mdi-one-up" />
+            <slot name="actions" />
         </template>
     </v-card>
 </template>

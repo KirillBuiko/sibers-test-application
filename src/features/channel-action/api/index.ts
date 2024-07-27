@@ -1,15 +1,16 @@
 import type { Channel_O } from "@/entities/channel";
+import { useNotifications } from "@/entities/notifications";
 import type { Subscribe_I } from "@/entities/subscribe";
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
 
 export const useChannelActions = () => {
     const subscribeApi = useSubscribeApi();
+    const notifications = useNotifications();
 
     async function subscribe(channel: Channel_O, sub: Subscribe_I) {
         if (sub.user == undefined || sub.channel == undefined) return;
         if (channel.blacklist.includes(sub.user)) {
-            // TODO: Notification
-            throw "Blacklisted";
+            notifications.openNotification("You're blocked in this channel");
         } else {
             return subscribeApi.subscribe(sub);
         }
