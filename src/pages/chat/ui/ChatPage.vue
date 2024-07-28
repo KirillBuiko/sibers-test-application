@@ -63,7 +63,7 @@ function moveChatDown() {
                         <template v-slot:activator="{ props }">
                             <v-btn prepend-icon="mdi-account-group"
                                    variant="plain"
-                                   v-bind="props">{{ context.subscribed.length }} users</v-btn>
+                                   v-bind="props">{{ context.subscribedIds.length }} users</v-btn>
                         </template>
                         <users-list :users="context.subscribedUsers"
                                     :channel="context.channel" />
