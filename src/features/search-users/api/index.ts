@@ -18,8 +18,8 @@ export const useUsersSearch = () => {
             user
         }))
         return _.chain(rankedUsers)
-            .filter(ranked => ranked.rank > 0.4)
-            .sortBy(["rank"])
+            .filter(ranked => ranked.rank > 0.2)
+            .sort((a, b) => a.rank < b.rank ? 1 : -1)
             .map(ranked => ranked.user)
             .value();
     }
