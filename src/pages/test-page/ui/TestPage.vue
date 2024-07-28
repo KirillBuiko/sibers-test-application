@@ -6,7 +6,7 @@ import { ref } from "vue";
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
 import type { Subscribe_O } from "@/entities/subscribe";
 import { useMessageApi, type Message_O } from "@/entities/message";
-import { useUserApi, type User_O } from "@/entities/user";
+import { useUserApi, type User_O } from "@/entities/user-e";
 import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";
 
 const newIds = ref<Awaited<ReturnType<typeof fillDbWithTestData>> | undefined>()

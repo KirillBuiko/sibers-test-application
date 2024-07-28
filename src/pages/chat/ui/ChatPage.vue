@@ -5,7 +5,7 @@ import { MessagesList } from "@/widgets/messages-list";
 import { SendMessage } from "@/features/send-message";
 import { HrSeparator } from "@/shared/ui/hr-separator";
 import { useChatContext } from "../model";
-import { useUser } from "@/entities/user";
+import { useUser } from "@/entities/user-e";
 import { useBroadcastApi } from "@/shared/api/broadcast";
 import { onMounted, ref, watch, type VNode } from "vue";
 import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";

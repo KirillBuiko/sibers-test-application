@@ -2,7 +2,7 @@
 import "./style.scss"
 import { PageHeader } from "@/widgets/page-header";
 import { HrSeparator } from "@/shared/ui/hr-separator";
-import { type User_O } from "@/entities/user";
+import { type User_O } from "@/entities/user-e";
 import { ref } from "vue";
 import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";
 import { SearchUsers } from "@/features/search-users";

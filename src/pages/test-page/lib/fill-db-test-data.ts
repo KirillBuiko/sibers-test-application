@@ -1,7 +1,7 @@
 import { useChannelApi } from "@/entities/channel";
 import { useMessageApi } from "@/entities/message";
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
-import { useUserApi } from "@/entities/user";
+import { useUserApi } from "@/entities/user-e";
 
 function randomNumber() {
     return Math.floor(Math.random() * 1000000)

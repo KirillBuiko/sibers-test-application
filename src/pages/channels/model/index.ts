@@ -2,7 +2,7 @@ import { useChannelApi, type Channel_I, type Channel_O } from "@/entities/channe
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { FETCH_CHANNELS_LIMIT } from "../config";
-import { useUser } from "@/entities/user";
+import { useUser } from "@/entities/user-e";
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
 
 export const useChannelsContext = defineStore("channels-context", () => {

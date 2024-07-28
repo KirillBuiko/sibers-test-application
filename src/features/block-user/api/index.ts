@@ -1,7 +1,7 @@
 import { useChannelApi, type Channel_O } from "@/entities/channel";
 import { useNotifications } from "@/entities/notification";
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api"
-import { useUser } from "@/entities/user";
+import { useUser } from "@/entities/user-e";
 import { useBroadcastApi } from "@/shared/api/broadcast";
 
 export const useBlockUser = () => {

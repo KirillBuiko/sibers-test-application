@@ -1,5 +1,5 @@
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
-import { useUser } from "@/entities/user";
+import { useUser } from "@/entities/user-e";
 import { useChatContext } from "@/pages/chat"
 import type { NavigationGuard } from "vue-router"
 

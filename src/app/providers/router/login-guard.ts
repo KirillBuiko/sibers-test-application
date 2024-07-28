@@ -1,4 +1,4 @@
-import { useUser } from "@/entities/user";
+import { useUser } from "@/entities/user-e";
 import type { NavigationGuard } from "vue-router"
 
 /**

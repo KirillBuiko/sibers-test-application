@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import "./style.scss"
-import { useUser, useUserApi, type User_I } from "@/entities/user";
+import { useUser, useUserApi, type User_I } from "@/entities/user-e";
 import { useRouter } from "vue-router";
 import { toRaw } from "vue";
 import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";

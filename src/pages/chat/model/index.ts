@@ -1,6 +1,6 @@
 import { useChannelApi, type Channel_O } from "@/entities/channel";
 import { useMessageApi, type Message_O } from "@/entities/message";
-import { useUserApi, type User_O } from "@/entities/user";
+import { useUserApi, type User_O } from "@/entities/user-e";
 import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
 import { FETCH_MESSAGES_LIMIT } from "../config";

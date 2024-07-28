@@ -4,7 +4,7 @@ import { PageHeader } from "@/widgets/page-header";
 import { HrSeparator } from "@/shared/ui/hr-separator";
 import "./style.scss"
 import { useChannelsContext } from "../model";
-import { useUser } from "@/entities/user";
+import { useUser } from "@/entities/user-e";
 import { useRouter } from "vue-router";
 import { useBroadcastApi } from "@/shared/api/broadcast";
 import { ref } from "vue";

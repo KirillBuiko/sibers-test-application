@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { User_O } from "@/entities/user";
+import type { User_O } from "@/entities/user-e";
 import "./style.scss"
 import type { Message_O } from "@/entities/message";
 import { MessageItem } from "@/entities/message";

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Channel_O } from "@/entities/channel";
-import { useUser, type User_O } from "@/entities/user";
+import { useUser, type User_O } from "@/entities/user-e";
 // import "./style.scss"
-import UserItem from "@/entities/user/ui/UserItem.vue";
+import UserItem from "@/entities/user-e/ui/UserItem.vue";
 import { BlockUser } from "@/features/block-user";
 
 const props = defineProps<{

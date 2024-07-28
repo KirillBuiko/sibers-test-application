@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { User_O } from "@/entities/user";
+import type { User_O } from "@/entities/user-e";
 import { useUsersSearch } from "../api";
 import _ from "lodash";
 import { ref } from "vue";

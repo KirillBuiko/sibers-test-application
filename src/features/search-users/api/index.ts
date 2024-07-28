@@ -1,4 +1,4 @@
-import { useUserApi } from "@/entities/user"
+import { useUserApi } from "@/entities/user-e"
 import _ from "lodash";
 import { compareTwoStrings } from "string-similarity";
 
