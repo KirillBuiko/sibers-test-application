@@ -50,7 +50,7 @@ broadcast.on("channel", () => {
                 <page-header :back-active="false">
                     Channels
                 </page-header>
-                <!-- TODO: Move menu and dialog to widgets -->
+                <!-- TODO: Move menu to widgets -->
                 <v-menu :close-on-content-click="false"
                         location="right bottom"
                         origin="right top">
@@ -71,7 +71,9 @@ broadcast.on("channel", () => {
                                      @click="$router.push({ name: 'users' })">Users</v-list-item>
                         <v-divider />
                         <v-list-item prepend-icon="mdi-logout"
+                                     class="text-red"
                                      slim
+                                     color="pink"
                                      @click="onLogout">Logout</v-list-item>
                     </v-list>
                 </v-menu>
@@ -84,6 +86,7 @@ broadcast.on("channel", () => {
             </main>
         </div>
 
+        <!-- TODO: Move dialog to widgets -->
         <v-dialog max-width="500"
                   v-model="createChannelOpen">
             <v-card title="Create channel">
