@@ -9,7 +9,7 @@ function randomNumber() {
 
 const testMessage: string = "Eiusmod ullamco veniam anim ullamco in exercitation ullamco aute magna. Ullamco non cillum ullamco minim ad magna mollit enim. Eu id est adipisicing ad qui dolore consequat ullamco aliquip consectetur commodo aliquip aliquip id."
 
-
+/** Fill db with new data */
 export async function fillDbWithTestData() {
     const messageApi = useMessageApi();
     const channelApi = useChannelApi();

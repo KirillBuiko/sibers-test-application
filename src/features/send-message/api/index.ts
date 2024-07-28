@@ -1,5 +1,6 @@
 import { useMessageApi, type Message_I } from "@/entities/message"
 
+/** Send message API */
 export const useSendMessage = function () {
     const api = useMessageApi()
 

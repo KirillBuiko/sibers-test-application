@@ -2,6 +2,7 @@ import { useUserApi } from "@/entities/user-e"
 import _ from "lodash";
 import { compareTwoStrings } from "string-similarity";
 
+/** Users search API */
 export const useUsersSearch = () => {
     const userApi = useUserApi();
 

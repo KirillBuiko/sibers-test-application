@@ -60,7 +60,7 @@ const isLogin = ref(true);
 </script>
 
 <template>
-    <!-- TODO: Move login and sign in to widgets... -->
+    <!-- TODO: Move login and registration to widgets... -->
     <page-container :elevated="false">
         <div class="login-page">
             <v-card v-if="isLogin"

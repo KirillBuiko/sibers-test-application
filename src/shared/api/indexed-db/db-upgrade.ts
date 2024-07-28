@@ -1,6 +1,7 @@
 import { IndexedDbStore } from "@/shared/config";
 import { testChannels, testMessages, testSubscriptions, testUsers } from "./test-db-data";
 
+/** IndexedDB initialize function. Includes fill db with test data */
 export const dbUpgrade: ((this: IDBOpenDBRequest, ev: IDBVersionChangeEvent) => any) = function () {
     const db = this.result;
 
@@ -20,6 +21,7 @@ export const dbUpgrade: ((this: IDBOpenDBRequest, ev: IDBVersionChangeEvent) => 
     createBasicIndex(users, ["name", "avatar"], { unique: false });
     createBasicIndex(users, ["username", "email"], { unique: true });
 
+    // putting test data
     testUsers.forEach(user => users.put(user));
     testChannels.forEach(ch => channels.put(ch));
     testSubscriptions.forEach(sub => subscriptions.put(sub));

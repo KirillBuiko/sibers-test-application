@@ -3,6 +3,7 @@ import { defineStore } from "pinia"
 import { computed, ref } from "vue"
 import { useUserApi } from "../api"
 
+/** User get type */
 export type User_O = EntityBase & {
     name: string,
     username: string,
@@ -10,6 +11,7 @@ export type User_O = EntityBase & {
     avatar: string
 }
 
+/** User put type */
 export type User_I = Partial<EntityBase> & {
     name: string,
     username: string,
@@ -17,6 +19,7 @@ export type User_I = Partial<EntityBase> & {
     avatar: string
 }
 
+/** Storage of global user state */
 export const useUser = defineStore("user-store", () => {
     const userId = ref(Number(sessionStorage.getItem("user-id") || -1));
     const userApi = useUserApi();

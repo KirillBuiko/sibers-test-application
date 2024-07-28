@@ -4,6 +4,7 @@ import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api"
 import { useUser } from "@/entities/user-e";
 import { useBroadcastApi } from "@/shared/api/broadcast";
 
+/** Block user API */
 export const useBlockUser = () => {
     const subscribeApi = useSubscribeApi();
     const channelApi = useChannelApi();

@@ -10,11 +10,12 @@ import { useBroadcastApi } from "@/shared/api/broadcast";
 
 export type UserByKey = { [ind: number]: User_O }
 
+/** Chat page context store. Used for data fetch and store. */
 export const useChatContext = defineStore("chat-context", () => {
     const messages: Ref<Message_O[]> = ref([]);
     const messageUsers: Ref<UserByKey> = ref({});
     const subscribedUsers: Ref<User_O[]> = ref([]);
-    const subscribed: Ref<number[]> = ref([]);
+    const subscribedIds: Ref<number[]> = ref([]);
     const channel: Ref<Channel_O | undefined> = ref(undefined);
 
     const channelApi = useChannelApi();
@@ -65,13 +66,13 @@ export const useChatContext = defineStore("chat-context", () => {
 
     async function updateSubscribed() {
         if (!channel.value) return;
-        subscribed.value = (await subscribeApi.fetchChannelUsers(channel.value.id)).map(sub => sub.user);
-        subscribedUsers.value = await userApi.fetchUsersByIds(subscribed.value);
+        subscribedIds.value = (await subscribeApi.fetchChannelUsers(channel.value.id)).map(sub => sub.user);
+        subscribedUsers.value = await userApi.fetchUsersByIds(subscribedIds.value);
         console.log(subscribedUsers.value);
     }
 
     return {
-        messages, messageUsers, subscribedUsers: subscribedUsers, subscribed, channel,
+        messages, messageUsers, subscribedUsers: subscribedUsers, subscribedIds, channel,
         setChannel, updateMessages, updateUsers, updateSubscribed
     }
 });

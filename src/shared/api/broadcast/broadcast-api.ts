@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { BROADCAST_CHANNEL } from "../../config";
 import type { BroadcastEvent, BroadcastEventHandler, BroadcastHandlerFunction, BroadcastMessage } from "./types";
 
+/** Broadcast api. Can send messages to other tabs and receive */
 export const useBroadcastApi = defineStore("broadcast-api", () => {
     const channel = new BroadcastChannel(BROADCAST_CHANNEL);
     const eventHandlers: BroadcastEventHandler[] = [];
@@ -14,6 +15,7 @@ export const useBroadcastApi = defineStore("broadcast-api", () => {
         });
     }
 
+    /** Send message to other tabs. Will fire in-page subscribers */
     function sendMessage<E extends BroadcastEvent>(message: BroadcastMessage<E>) {
         channel.postMessage(message);
         eventHandlers.forEach((handler) => {
@@ -21,12 +23,12 @@ export const useBroadcastApi = defineStore("broadcast-api", () => {
         })
     }
 
+    /** Subscribe on receive events. Will fire on in-page events */
     function on<E extends BroadcastEvent>(event: E, fn: BroadcastHandlerFunction<E>) {
         eventHandlers.push({
             event,
             fn: fn as BroadcastHandlerFunction
         })
-
     }
 
     return { sendMessage, on, channel }

@@ -3,6 +3,9 @@ import { useIndexDBApi, type IDBGetOptions } from "@/shared/api/indexed-db/index
 import { IndexedDbStore } from "@/shared/config";
 import type { Channel_I, Channel_O } from "../model";
 
+/**
+ * Api for channel fetch
+ */
 export const useChannelApi = () => {
     const db = useIndexDBApi();
     const broadcast = useBroadcastApi();

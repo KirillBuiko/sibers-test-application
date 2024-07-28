@@ -5,6 +5,7 @@ import { FETCH_CHANNELS_LIMIT } from "../config";
 import { useUser } from "@/entities/user-e";
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
 
+/** Channel page context store. Used for data fetch and store. */
 export const useChannelsContext = defineStore("channels-context", () => {
     const channels = ref<Channel_O[]>([]);
     const subscribedChannels = ref<number[]>([]);
@@ -15,7 +16,6 @@ export const useChannelsContext = defineStore("channels-context", () => {
 
     async function init() {
         await updateChannels();
-        console.log("CH", channels.value);
         await updateSubscribes();
     }
 
