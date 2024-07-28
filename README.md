@@ -1,39 +1,46 @@
-# sibers-test-application
+# Sibers test application
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Basic local real-time chat application with multiple channels. The data is stored in IndexedDB, BroadcastChannel is used for real-time support. Supported functions:
+- You can send basic text messages and read other's in channels
+- You can create your own channels for communication or subscribe to existing one
+- You can get channel's users list
+- If you're owner of the channel, you can block users
+- There is users page, where you can search them
 
 ## Project Setup
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## Technology stack
+<font size="4">
 
-```sh
-npm run build
-```
+`HTML+CSS+JS` \
+`Vue3 (Composition API)` \
+`TypeScript` \
+`SCSS` \
+`Pinia` \
+`IndexedDB`
 
-### Lint with [ESLint](https://eslint.org/)
+</font>
 
-```sh
-npm run lint
-```
+### Architecture
+The application is developed using the FSD (Feature-Sliced Design) architectural methodology.
+
+## Known issues
+
+Due to lack of my time, something small or big have not been completed:
+- Channel actions: remove, rename, search
+- Channel users search, unblock
+- Design is not very interesting
+- Registration fields validation
+- Some notifications are not made
+- There is no any fetch limits and lazy loading
+
+## Thoughts about
+
+Well, it was an interesting experience. To be honest, it was my first chat application. The first thought I had was that I could do this using WebSocket. Just send and receive events and show data. But it must be a local application. So, the next question is where to store data. LocalStorage is very easy to use, but I decided not to use it because it's too simple. Another option is indexedDB. It was created for large applications with local storage. And it was also my first application with indexedDB. Later I realized that it doesn't have any events on data update and I need an additional transfer channel - BroadcastChannel.
+
+Thus, most of the problems were related to questions about where in the application to fetch, store, and pass data. I'm practicing FSD now and it took me a lot of effort to figure out how to build the application and components. But I am glad I spent my time making it, even if the quality is lacking, I will keep practicing to get better.
