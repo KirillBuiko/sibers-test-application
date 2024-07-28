@@ -21,7 +21,7 @@ export type User_I = Partial<EntityBase> & {
 
 /** Storage of global user state */
 export const useUser = defineStore("user-store", () => {
-    const userId = ref(Number(sessionStorage.getItem("user-id") || -1));
+    const userId = ref(Number(sessionStorage.getItem("user-id") ?? -1));
     const userApi = useUserApi();
 
     const isAuthorized = computed(() => {
@@ -29,7 +29,7 @@ export const useUser = defineStore("user-store", () => {
     })
 
     function getUserId() {
-        return userId.value;
+        return userId.value ?? -1;
     }
 
     function setUserId(value: number) {

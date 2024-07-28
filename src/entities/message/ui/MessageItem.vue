@@ -6,11 +6,13 @@ const props = defineProps<{
     avatarLink: string,
     name: string,
     value: string,
+    isSender: boolean
 }>()
 </script>
 
 <template>
-    <div class="message">
+    <div class="message"
+         :class="{ 'message--sender': props.isSender }">
         <avatar-icon class="message__avatar"
                      :image-link="props.avatarLink" />
         <h2 class="message__name">

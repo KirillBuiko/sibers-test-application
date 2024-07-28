@@ -5,6 +5,7 @@
         ". V";
     grid-template-columns: 40px 1fr;
     grid-template-rows: 40px 1fr;
+    column-gap: 10px;
     min-height: 70px;
 
     .message__avatar {

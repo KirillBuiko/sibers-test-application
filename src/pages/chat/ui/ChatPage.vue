@@ -74,10 +74,10 @@ function moveChatDown() {
             <main class="chat-page__body">
                 <messages-list :messages="context.messages"
                                :users="context.messageUsers"
-                               :user-id="user.getUserId() || -1"
+                               :user-id="user.getUserId()"
                                ref="listRef" />
-                <send-message :channel-id="context.channel.id || -1"
-                              :user-id="user.getUserId() || -1" />
+                <send-message :channel-id="context.channel.id"
+                              :user-id="user.getUserId()" />
             </main>
         </div>
     </page-container>

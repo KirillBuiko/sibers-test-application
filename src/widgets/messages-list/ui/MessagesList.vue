@@ -31,7 +31,7 @@ defineExpose({ goToStart });
                       :key="m.id"
                       :avatar-link="props.users[m.user]?.avatar"
                       :name="props.users[m.user]?.name"
-                      :value="m.value">
-        </message-item>
+                      :value="m.value"
+                      :is-sender="props.userId == m.user" />
     </div>
 </template>
