@@ -1,5 +1,5 @@
 import type { Channel_O } from "@/entities/channel";
-import { useNotifications } from "@/entities/notifications";
+import { useNotifications } from "@/entities/notification";
 import type { Subscribe_I } from "@/entities/subscribe";
 import { useSubscribeApi } from "@/entities/subscribe/api/subscribe-api";
 

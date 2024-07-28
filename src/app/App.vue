@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NotificationsBar } from '@/entities/notifications';
+import { NotificationsBar } from '@/entities/notification';
 import { RouterView } from 'vue-router'
 </script>
 

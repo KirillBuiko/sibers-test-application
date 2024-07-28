@@ -10,7 +10,7 @@ import { useBroadcastApi } from "@/shared/api/broadcast";
 import { onMounted, ref, watch, type VNode } from "vue";
 import PageContainer from "@/shared/ui/layouts/page-container/PageContainer.vue";
 import { UsersList } from "@/widgets/users-list";
-import { useNotifications } from "@/entities/notifications";
+import { useNotifications } from "@/entities/notification";
 import { useRouter } from "vue-router";
 
 const context = useChatContext();
