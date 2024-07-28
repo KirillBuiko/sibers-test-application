@@ -60,19 +60,14 @@ export const useChatContext = defineStore("chat-context", () => {
     async function updateUsers() {
         if (!channel.value) return;
         const userKeys = _.uniq([...messages.value.map(message => message.user)]);
-        console.log(userKeys);
-
         messageUsers.value = _.chain(await userApi.fetchUsersByIds(userKeys))
             .compact().keyBy("id").value();
-        console.log(messageUsers.value);
     }
 
     async function updateSubscribed() {
         if (!channel.value) return;
         subscribedIds.value = (await subscribeApi.fetchChannelUsers(channel.value.id)).map(sub => sub.user);
-        console.log(subscribedIds.value);
         subscribedUsers.value = (await userApi.fetchUsersByIds(subscribedIds.value)).filter(user => user).reverse();
-        console.log(subscribedUsers.value);
     }
 
     return {

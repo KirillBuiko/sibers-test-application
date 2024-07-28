@@ -40,7 +40,6 @@ function sendNotify() {
 }
 
 broadcast.on("message", (message) => {
-    console.log(message);
     updateList();
 })
 
